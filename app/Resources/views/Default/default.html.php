@@ -89,8 +89,9 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
             <!-- LISTS BLOGS -->
-            <?php foreach ($this->paginator as $blog){ ?>
+            <?php foreach ($this->blogList as $blog){ ?>
             <div class="post-preview">
+
                 <a href="post.html">
                     <h2 class="post-title">
                         <?=$blog->getTitle(); ?>
@@ -101,6 +102,7 @@
                         </h3>
                     <?php } ?>
                 </a>
+
                 <p class="post-meta">
                     Posted by
                     <a href="#"><?=$blog->getAuthor(); ?></a>
@@ -108,24 +110,22 @@
                         on <?=$blog->getDateCreated()->format("d-F-Y H:m"); ?>
                     <?php endif; ?>
                 </p>
+
             </div>
             <hr>
             <?php } ?>
 
 
             <!-- pagination start -->
-            <?=$this->render("Backend/Includes/paging.html.php", get_object_vars($this->paginator->getPages("Sliding")), [
-                'urlprefix' => $this->document->getFullPath() . '?page=', // just example (this parameter could be used in paging.php to construct the URL)
-                'appendQueryString' => true // just example (this parameter could be used in paging.php to construct the URL)
+            <?=$this->render("Includes/paging.html.php",
+                get_object_vars($this->blogList->getPages("Sliding")), [
+                'urlprefix' => $this->document->getFullPath() . '?page=',
+                'appendQueryString' => true
             ]); ?>
             <!-- pagination end -->
 
             <!-- Pager -->
-            <ul class="pager">
-                <li class="next">
-                    <a href="#">Older Posts &rarr;</a>
-                </li>
-            </ul>
+
         </div>
     </div>
 </div>

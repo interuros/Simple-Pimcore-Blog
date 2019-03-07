@@ -19,8 +19,7 @@ class DefaultController extends FrontendController
         $paginator->setCurrentPageNumber($request->get('page'));
         $paginator->setItemCountPerPage(3);
 
-        $this->view->paginator  = $paginator;
-
         $this->view->blogList = $paginator;
     }
+
 }
