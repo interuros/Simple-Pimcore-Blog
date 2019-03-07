@@ -22,4 +22,9 @@ class DefaultController extends FrontendController
         $this->view->blogList = $paginator;
     }
 
+    public  function  blogarticleAction(Request $request) {
+        $blogarticle = Blogpost::getById($request->get('id'));
+
+        $this->view->blogarticle = $blogarticle;
+    }
 }

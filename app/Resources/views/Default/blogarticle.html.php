@@ -25,8 +25,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -67,73 +67,53 @@
     <!-- /.container -->
 </nav>
 
-<!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('/static/img/home-bg.jpg')">
+<header class="intro-header"
+        style="background-image: url(
+        <?php if ($this->blogarticle->getHeaderbackgroundimage()) : ?>
+            <?=$this->blogarticle->getHeaderbackgroundimage()->getThumbnail("headerbackground"); ?>
+        <?php else: ?>
+            /static/img/post-bg.jpg
+        <?php endif; ?>
+        )">
+
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Clean Blog</h1>
-                    <hr class="small">
-                    <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                <div class="post-heading">
+                    <h1><?=$this->blogarticle->getTitle(); ?></h1>
+                    <h2 class="subheading"><?=$this->blogarticle->getsubTitle(); ?></h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="#"><?=$this->blogarticle->getAuthor(); ?></a>
+                        <?php if($blogarticle->getDateCreated()): ?>
+                            on <?=$blogarticle->getDateCreated()->format("d-F-Y H:m"); ?>
+                        <?php endif; ?>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+               <?php
 
-            <!-- LISTS BLOGS -->
-            <?php foreach ($this->blogList as $blog){ ?>
-            <div class="post-preview">
+                    if ($this->blogarticle->getContent()) {
 
-                <a href="<?=$this->path('blogpost', [
-                    'id' => $blog->getId(),
-                    'title' => preg_replace("/[^a-zA-Z0-9-_\.]/",
-                                            "_",
-                                            $blog->getTitle())
-                ]); ?>">
-                    <h2 class="post-title">
-                        <?=$blog->getTitle(); ?>
-                    </h2>
-                    <?php if($blog->getsubTitle()) { ?>
-                        <h3 class="post-subtitle">
-                            <?=$blog->getsubTitle(); ?>
-                        </h3>
-                    <?php } ?>
-                </a>
+                        echo $this->blogarticle->getContent();
 
-                <p class="post-meta">
-                    Posted by
-                    <a href="#"><?=$blog->getAuthor(); ?></a>
-                    <?php if($blog->getDateCreated()): ?>
-                        on <?=$blog->getDateCreated()->format("d-F-Y H:m"); ?>
-                    <?php endif; ?>
-                </p>
+                    }
 
+               ?>
             </div>
-            <hr>
-            <?php } ?>
-
-
-            <!-- pagination start -->
-            <?=$this->render("Includes/paging.html.php",
-                get_object_vars($this->blogList->getPages("Sliding")), [
-                'urlprefix' => $this->document->getFullPath() . '?page=',
-                'appendQueryString' => true
-            ]); ?>
-            <!-- pagination end -->
-
-            <!-- Pager -->
-
         </div>
     </div>
-</div>
+</article>
 
 <hr>
 
