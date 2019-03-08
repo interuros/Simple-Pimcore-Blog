@@ -58,7 +58,9 @@
 <body>
 
 <!-- Navigation -->
+<?php if (!$this->editmode): ?>
 <?= $this->inc("/includes/navigation"); ?>
+ <?php endif; ?>
 
 <!-- OUTPUT CONTENT HERE -->
 <?php $this->slots()->output("_content"); ?>
