@@ -2,8 +2,8 @@
 
 namespace AppBundle\Document\Areabrick;
 
+use Pimcore\Model\DataObject\Blogpost\Listing;
 use Pimcore\Model\Document\Tag\Area\Info;
-use Pimcore\Model\DataObject\Blogpost;
 use Zend\Paginator\Paginator;
 
 class BlogList extends AbstractAreabrick{
@@ -16,11 +16,11 @@ class BlogList extends AbstractAreabrick{
     public function action(Info $info)
     {
         //list of blogs
-        $blogList = new Blogpost\Listing();
+        $blogList = new Listing();
 
         //pagination
         $paginator = new Paginator($blogList);
-        $paginator->setCurrentPageNumber($info->getParam('page'));
+        $paginator->setCurrentPageNumber($info->getRequest()->get("page"));
         $paginator->setItemCountPerPage(3);
 
         $info->view->blogList = $paginator;
