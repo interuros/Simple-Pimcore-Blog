@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Pimcore\Controller\FrontendController;
 use Pimcore\Model\DataObject\Blogpost;
+use Pimcore\Model\Document;
 use Symfony\Component\HttpFoundation\Request;
 use Zend\Paginator\Paginator;
 
@@ -22,9 +23,4 @@ class DefaultController extends FrontendController
         $this->view->blogList = $paginator;
     }
 
-    public  function  blogarticleAction(Request $request) {
-        $blogarticle = Blogpost::getById($request->get('id'));
-
-        $this->view->blogarticle = $blogarticle;
-    }
 }

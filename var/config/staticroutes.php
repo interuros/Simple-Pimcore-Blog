@@ -7,7 +7,7 @@ return [
         "pattern" => "/\\/article\\/([0-9]+)\\/(.*)/",
         "reverse" => "/article/%id/%title",
         "module" => NULL,
-        "controller" => "@AppBundle\\Controller\\DefaultController",
+        "controller" => "@AppBundle\\Controller\\BlogController",
         "action" => "blogarticle",
         "variables" => "id,title",
         "defaults" => NULL,
@@ -17,6 +17,6 @@ return [
         "priority" => 0,
         "legacy" => FALSE,
         "creationDate" => 1551964089,
-        "modificationDate" => 1551965496
+        "modificationDate" => 1552035332
     ]
 ];
