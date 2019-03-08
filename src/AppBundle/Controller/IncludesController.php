@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Pimcore\Controller\FrontendController;
+
 use Symfony\Component\HttpFoundation\Request;
 
 class IncludesController extends FrontendController
@@ -12,6 +13,9 @@ class IncludesController extends FrontendController
     }
 
     public function navigationAction(Request $request) {
+
+
+
 
     }
 

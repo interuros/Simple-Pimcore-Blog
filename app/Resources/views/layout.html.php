@@ -34,7 +34,7 @@
 <body>
 
 <!-- Navigation -->
-<?php echo $this->template("Includes/navigation.html.php"); ?>
+<?= $this->inc("/includes/navigation"); ?>
 
 <!-- OUTPUT CONTENT HERE -->
 <?php $this->slots()->output("_content"); ?>
