@@ -6,28 +6,52 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Clean Blog</title>
+    <?php
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        if(!$this->document) {
+            $this->document = \Pimcore\Model\Document::getById(1);
+        }
 
-    <!-- Theme CSS -->
-    <link href="/static/css/clean-blog.min.css" rel="stylesheet">
+        if ($this->document->getTitle()) {
+            echo $this->headTitle()->set($this->document->getTitle());
+        } else {
+            if ($this->title)
+                echo "<title>".$this->title."</title>";
+            else
+                echo "<title>Uros</title>";
+        }
 
-    <!-- Custom Fonts -->
-    <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        //APPEND DESCRIPTION TO META TAGS IF THERE IS ANY
+        if ($this->document->getDescription()) {
+            $this->headMeta()->appendName("description", $this->document->getDescription());
+        } else {
+            $this->headMeta()->appendName("description", "My Blog page by me!");
+        }
+
+        //APPEND STYLESHEETS
+        $this->headLink()->appendStylesheet("/static/vendor/bootstrap/css/bootstrap.min.css", "screen", false, ["rel" => "stylesheet", "type" => "text/css"])
+                         ->appendStylesheet("/static/css/clean-blog.min.css", "screen", false, ["rel" => "stylesheet", "type" => "text/css"])
+                         ->appendStylesheet("/static/vendor/font-awesome/css/font-awesome.min.css", "screen", false, ["rel" => "stylesheet", "type" => "text/css"])
+                         ->appendStylesheet("//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic", "screen", false, ["rel" => "stylesheet", "type" => "text/css"])
+                         ->appendStylesheet("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800", "screen", false, ["rel" => "stylesheet", "type" => "text/css"]);
+
+        //APPEND HEAD SCRIPTS
+        $this->headScript()->appendFile("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", "text/javascript",
+                                        ["conditional" => "if lt IE 8"])
+                            ->appendFile("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js", "text/javascript",
+                                        ["conditional" => "if lt IE 8"]);
+
+
+        echo $this->headMeta();
+        echo $this->headLink();
+
+
+    ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <?=$this->headScript(); ?>
 
 </head>
 
