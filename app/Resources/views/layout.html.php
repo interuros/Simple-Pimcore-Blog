@@ -9,17 +9,13 @@
 
     <?php
 
-        if(!$this->document) {
-            $this->document = \Pimcore\Model\Document::getById(1);
-        }
-
-        if ($this->document->getTitle()) {
-            echo $this->headTitle()->set($this->document->getTitle());
+        if ($this->title) {
+            $this->headTitle()->set($this->title);
         } else {
-            if ($this->title)
-                echo "<title>".$this->title."</title>";
+            if ($this->document->getTitle())
+                $this->headTitle()->set($this->document->getTitle());
             else
-                echo "<title>Uros</title>";
+                $this->headTitle()->set("Uros");
         }
 
         //APPEND DESCRIPTION TO META TAGS IF THERE IS ANY
@@ -44,6 +40,7 @@
 
 
         echo $this->headMeta();
+        echo $this->headTitle();
         echo $this->headLink();
 
 
