@@ -74,7 +74,7 @@
 
 <!-- Contact Form JavaScript -->
 <script src="/static/js/jqBootstrapValidation.js"></script>
-<script src="/static/js/contact_me.js"></script>
+<!-- <script src="/static/js/contact_me.js"></script> -->
 
 <!-- Theme JavaScript -->
 <script src="/static/js/clean-blog.min.js"></script>
